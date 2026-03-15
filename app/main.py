@@ -1,17 +1,7 @@
 """Entrypoint FastAPI."""
-from contextlib import asynccontextmanager
-
 from fastapi import FastAPI
 
 from app.adapters.inbound.api.router import api_router
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Arranque: opcionalmente iniciar scheduler aquí
-    yield
-    # Cierre: parar scheduler
-    pass
 
 
 app = FastAPI(
@@ -23,7 +13,6 @@ app = FastAPI(
         "Persistencia en Supabase (tabla odds_raw)."
     ),
     version="0.1.0",
-    lifespan=lifespan,
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",

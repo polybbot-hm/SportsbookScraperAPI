@@ -5,7 +5,7 @@ from app.domain.models import OddsSnapshot
 
 
 class ScrapingServicePort:
-    """Interfaz que expone el caso de uso de scraping a la API/scheduler."""
+    """Interfaz que expone el caso de uso de scraping a la API."""
 
     def run_scrape(
         self,
