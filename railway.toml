@@ -1,0 +1,20 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+# ─── Cron Job diario LaLiga ──────────────────────────────────────────────────
+# En Railway, crea un segundo servicio de tipo "Cron" apuntando al mismo repo
+# y configura:
+#   Schedule:     0 9 * * *   (09:00 UTC = 10:00/11:00 Europe/Madrid según DST)
+#   Start Command: python -m scripts.run_laliga_daily_job
+#
+# El script valida internamente la zona horaria Europe/Madrid y el calendario
+# en config/laliga_calendar.json antes de ejecutar el scraping.
+#
+# Variables de entorno necesarias en el servicio Cron (mismas que la API):
+#   SUPABASE_URL, SUPABASE_KEY, CALENDAR_FILE_PATH, JOB_TIMEZONE
+# ─────────────────────────────────────────────────────────────────────────────

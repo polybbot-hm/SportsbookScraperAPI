@@ -1,0 +1,103 @@
+# ===========================================
+# Python
+# ===========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+wheels/
+share/python-wheels/
+MANIFEST
+
+# ===========================================
+# Entornos virtuales
+# ===========================================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ===========================================
+# Variables de entorno y secretos
+# ===========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+# ===========================================
+# Base de datos
+# ===========================================
+*.db
+*.sqlite
+*.sqlite3
+
+# Migraciones generadas (opcional, depende del flujo)
+# alembic/versions/
+
+# ===========================================
+# Testing y cobertura
+# ===========================================
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+*.cover
+*.py,cover
+
+# ===========================================
+# IDEs y editores
+# ===========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===========================================
+# Logs y caché
+# ===========================================
+*.log
+logs/
+*.cache
+
+# ===========================================
+# Jupyter Notebooks
+# ===========================================
+.ipynb_checkpoints/
+*.ipynb
+
+# ===========================================
+# Mypy / type checkers
+# ===========================================
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# ===========================================
+# Distribución y empaquetado
+# ===========================================
+*.tar.gz
+*.zip

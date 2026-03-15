@@ -1,0 +1,857 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SportsbookScraperAPI",
+    "description": "API para scraping de mercados de casas de apuestas deportivas. Mercados: principales, estadísticas, corners, handicap, resultado final, equipos, faltas. Casas: Codere (activo), Paf y Retabet (placeholder). Persistencia en Supabase (tabla odds_raw).",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/scrape": {
+      "post": {
+        "tags": [
+          "scrape"
+        ],
+        "summary": "Scraping manual genérico",
+        "description": "Ejecuta scraping de los mercados configurados para la casa y liga indicadas. Persiste en Supabase si DATABASE_URL está configurada.",
+        "operationId": "run_scrape_api_v1_scrape_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScrapeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OddsItemResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Run Scrape Api V1 Scrape Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scrape/laliga-hoy": {
+      "post": {
+        "tags": [
+          "scrape"
+        ],
+        "summary": "Scrapear todos los partidos de LaLiga del día",
+        "description": "Recopila todos los partidos de Primera División de hoy, extrae las cuotas de las categorías configuradas (PRINCIPALES, ESTADÍSTICAS, CORNERS, HANDICAP, RESULTADO FINAL, EQUIPOS) e inserta en Supabase. Devuelve un resumen con el detalle por partido y categoría.",
+        "operationId": "scrape_laliga_hoy_api_v1_scrape_laliga_hoy_post",
+        "parameters": [
+          {
+            "name": "bookmaker",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Casa de apuestas (por defecto: codere)",
+              "default": "codere",
+              "title": "Bookmaker"
+            },
+            "description": "Casa de apuestas (por defecto: codere)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScrapeSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scrape/status": {
+      "get": {
+        "tags": [
+          "scrape"
+        ],
+        "summary": "Estado del último scraping",
+        "operationId": "scrape_status_api_v1_scrape_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScrapeStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/odds": {
+      "get": {
+        "tags": [
+          "odds"
+        ],
+        "summary": "Listar cuotas actuales",
+        "description": "Obtiene las cuotas más recientes. Filtros: bookmaker, league_name, event_id.",
+        "operationId": "get_odds_api_v1_odds_get",
+        "parameters": [
+          {
+            "name": "bookmaker",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Casa de apuestas",
+              "title": "Bookmaker"
+            },
+            "description": "Casa de apuestas"
+          },
+          {
+            "name": "league_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Nombre de la liga",
+              "title": "League Name"
+            },
+            "description": "Nombre de la liga"
+          },
+          {
+            "name": "event_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "ID externo del evento",
+              "title": "Event Id"
+            },
+            "description": "ID externo del evento"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OddsItemResponse"
+                  },
+                  "title": "Response Get Odds Api V1 Odds Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/odds/{event_id}/history": {
+      "get": {
+        "tags": [
+          "odds"
+        ],
+        "summary": "Histórico de cuotas de un evento",
+        "operationId": "get_odds_history_api_v1_odds__event_id__history_get",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          },
+          {
+            "name": "bookmaker",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Bookmaker"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OddsItemResponse"
+                  },
+                  "title": "Response Get Odds History Api V1 Odds  Event Id  History Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/compare/{event_id}": {
+      "get": {
+        "tags": [
+          "compare"
+        ],
+        "summary": "Comparar cuotas de un evento (todas las casas)",
+        "operationId": "compare_by_event_api_v1_compare__event_id__get",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OddsItemResponse"
+                  },
+                  "title": "Response Compare By Event Api V1 Compare  Event Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/compare": {
+      "get": {
+        "tags": [
+          "compare"
+        ],
+        "summary": "Comparación global (cuotas por casa por mercado)",
+        "operationId": "compare_global_api_v1_compare_get",
+        "parameters": [
+          {
+            "name": "league_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "League Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompareItemResponse"
+                  },
+                  "title": "Response Compare Global Api V1 Compare Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookmakers": {
+      "get": {
+        "tags": [
+          "bookmakers"
+        ],
+        "summary": "Listar casas de apuestas",
+        "operationId": "list_bookmakers_api_v1_bookmakers_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BookmakerResponse"
+                  },
+                  "type": "array",
+                  "title": "Response List Bookmakers Api V1 Bookmakers Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/leagues": {
+      "get": {
+        "tags": [
+          "bookmakers"
+        ],
+        "summary": "Ligas con mercado de faltas",
+        "description": "Ligas que se sabe que tienen el mercado (cache en DB).",
+        "operationId": "list_leagues_api_v1_leagues_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Response List Leagues Api V1 Leagues Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/events": {
+      "get": {
+        "tags": [
+          "bookmakers"
+        ],
+        "summary": "Listar eventos con odds",
+        "operationId": "list_events_api_v1_events_get",
+        "parameters": [
+          {
+            "name": "league_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "League Name"
+            }
+          },
+          {
+            "name": "bookmaker",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Bookmaker"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventResponse"
+                  },
+                  "title": "Response List Events Api V1 Events Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "description": "Comprueba que la API está viva.",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookmakerResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "slug",
+          "active"
+        ],
+        "title": "BookmakerResponse",
+        "description": "Casa de apuestas disponible."
+      },
+      "CompareItemResponse": {
+        "properties": {
+          "partido": {
+            "type": "string",
+            "title": "Partido"
+          },
+          "mercado": {
+            "type": "string",
+            "title": "Mercado"
+          },
+          "selection": {
+            "type": "string",
+            "title": "Selection"
+          },
+          "fecha": {
+            "type": "string",
+            "title": "Fecha"
+          },
+          "cuotas_por_casa": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Cuotas Por Casa",
+            "description": "bookmaker -> cuota"
+          }
+        },
+        "type": "object",
+        "required": [
+          "partido",
+          "mercado",
+          "selection",
+          "fecha",
+          "cuotas_por_casa"
+        ],
+        "title": "CompareItemResponse",
+        "description": "Comparación: partido, mercado, selection, cuotas por casa."
+      },
+      "EventResponse": {
+        "properties": {
+          "external_id": {
+            "type": "string",
+            "title": "External Id"
+          },
+          "partido": {
+            "type": "string",
+            "title": "Partido"
+          },
+          "league_name": {
+            "type": "string",
+            "title": "League Name"
+          },
+          "sport": {
+            "type": "string",
+            "title": "Sport"
+          }
+        },
+        "type": "object",
+        "required": [
+          "external_id",
+          "partido",
+          "league_name",
+          "sport"
+        ],
+        "title": "EventResponse",
+        "description": "Evento (partido)."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "OddsItemResponse": {
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "title": "Fecha",
+            "description": "ISO timestamp del scraping"
+          },
+          "partido": {
+            "type": "string",
+            "title": "Partido",
+            "description": "Local vs Visitante"
+          },
+          "mercado": {
+            "type": "string",
+            "title": "Mercado",
+            "description": "Nombre del mercado"
+          },
+          "cuota": {
+            "type": "number",
+            "title": "Cuota",
+            "description": "Valor de la cuota"
+          },
+          "selection": {
+            "type": "string",
+            "title": "Selection",
+            "description": "Selección (ej: Local, Visitante)"
+          },
+          "bookmaker": {
+            "type": "string",
+            "title": "Bookmaker",
+            "description": "Casa de apuestas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fecha",
+          "partido",
+          "mercado",
+          "cuota",
+          "selection",
+          "bookmaker"
+        ],
+        "title": "OddsItemResponse",
+        "description": "Una cuota en formato estándar: fecha, partido, mercado, cuota."
+      },
+      "PartidoSummary": {
+        "properties": {
+          "partido": {
+            "type": "string",
+            "title": "Partido"
+          },
+          "categorias": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Categorias",
+            "description": "categoria -> nº mercados"
+          },
+          "total_mercados": {
+            "type": "integer",
+            "title": "Total Mercados"
+          }
+        },
+        "type": "object",
+        "required": [
+          "partido",
+          "categorias",
+          "total_mercados"
+        ],
+        "title": "PartidoSummary",
+        "description": "Resumen de un partido scrapeado."
+      },
+      "ScrapeRequest": {
+        "properties": {
+          "bookmaker": {
+            "type": "string",
+            "title": "Bookmaker",
+            "description": "Casa de apuestas: codere, paf, retabet"
+          },
+          "league_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "League Name",
+            "description": "Filtrar por liga; si se omite, todas las ligas con mercado"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bookmaker"
+        ],
+        "title": "ScrapeRequest",
+        "description": "Request para lanzar scraping manual."
+      },
+      "ScrapeStatusResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "running | completed | idle"
+          },
+          "last_run": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Run"
+          },
+          "bookmaker": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bookmaker"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ScrapeStatusResponse",
+        "description": "Estado del último scraping."
+      },
+      "ScrapeSummaryResponse": {
+        "properties": {
+          "bookmaker": {
+            "type": "string",
+            "title": "Bookmaker"
+          },
+          "liga": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Liga"
+          },
+          "fecha_scraping": {
+            "type": "string",
+            "title": "Fecha Scraping"
+          },
+          "total_cuotas_insertadas": {
+            "type": "integer",
+            "title": "Total Cuotas Insertadas"
+          },
+          "partidos_scrapeados": {
+            "type": "integer",
+            "title": "Partidos Scrapeados"
+          },
+          "detalle": {
+            "items": {
+              "$ref": "#/components/schemas/PartidoSummary"
+            },
+            "type": "array",
+            "title": "Detalle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bookmaker",
+          "liga",
+          "fecha_scraping",
+          "total_cuotas_insertadas",
+          "partidos_scrapeados",
+          "detalle"
+        ],
+        "title": "ScrapeSummaryResponse",
+        "description": "Resumen de un scraping masivo (ej: LaLiga del día)."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
