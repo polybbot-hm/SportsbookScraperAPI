@@ -1,0 +1,59 @@
+# ─── Configuración de ligas y bookmakers ───────────────────────────────────────
+#
+# Cambia "liga_activa" para seleccionar qué competición scrapear.
+# Añade los IDs que correspondan en cada bookmaker cuando quieras ampliar ligas.
+# Si un ID está como null, ese bookmaker se omite para esa liga.
+
+liga_activa: la_liga
+
+ligas:
+
+  la_liga:
+    nombre: "La Liga"
+    bookmakers:
+      speedy:
+        group_id: 1000095049
+      granmadrid:
+        champ_id: 2941
+      kirol:
+        competition_id: 1
+
+  premier_league:
+    nombre: "Premier League"
+    bookmakers:
+      speedy:
+        group_id: null          # pendiente — buscar en Kambi API
+      granmadrid:
+        champ_id: null          # pendiente — buscar en Altenar API
+      kirol:
+        competition_id: null    # pendiente — buscar en Kirolbet
+
+  bundesliga:
+    nombre: "Bundesliga"
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null
+
+  serie_a:
+    nombre: "Serie A"
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null
+
+  ligue_1:
+    nombre: "Ligue 1"
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null

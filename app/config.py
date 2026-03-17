@@ -1,4 +1,6 @@
-"""Configuración de la aplicación."""
+"""Configuración de la aplicación — solo secretos y variables de entorno.
+La configuración estructural (delays, mappings, IDs) vive en config/*.yaml.
+"""
 from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -10,18 +12,20 @@ class Settings(BaseSettings):
     app_name: str = "SportsbookScraperAPI"
     debug: bool = False
 
-    # Supabase (REST API — se usa supabase-py)
+    # MongoDB (principal)
+    mongo_uri: Optional[str] = None
+
+    # Supabase — mantenido para compatibilidad hacia atrás
     supabase_url: Optional[str] = None
     supabase_key: Optional[str] = None
 
-    # PostgreSQL directo (opcional, alternativa a supabase_url+key)
+    # PostgreSQL directo (alternativa legacy)
     database_url: Optional[str] = None
 
-    cache_ttl_seconds: int = 300
-    scrape_delay_min: float = 0.3
-    scrape_delay_max: float = 0.8
-    scrape_cron: str = "0 */6 * * *"  # cada 6 horas
+    # Paths de configuración YAML (override por entorno)
+    app_config_path: str = "config/app.yaml"
+    leagues_config_path: str = "config/leagues.yaml"
+    bookmakers_config_dir: str = "config/bookmakers"
 
-    # Cron diario LaLiga
-    calendar_file_path: str = "config/laliga_calendar.json"
+    # Cron diario LaLiga (override de app.yaml si se necesita)
     job_timezone: str = "Europe/Madrid"

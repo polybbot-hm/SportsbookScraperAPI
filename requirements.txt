@@ -3,12 +3,22 @@ fastapi>=0.109.0
 uvicorn[standard]>=0.27.0
 pydantic>=2.5.0
 pydantic-settings>=2.1.0
-supabase>=2.3.0
+
+# MongoDB (principal)
+pymongo>=4.6.0
+motor>=3.3.0
+
+# Configuración YAML
+pyyaml>=6.0.1
 
 # HTTP y scraping
 requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.1.0
+undetected-chromedriver>=3.5.5
 
-# Base de datos
+# Base de datos legacy (Supabase / PostgreSQL)
+supabase>=2.3.0
 sqlalchemy>=2.0.0
 psycopg2-binary>=2.9.9
 alembic>=1.13.0

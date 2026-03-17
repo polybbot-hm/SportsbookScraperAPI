@@ -1,0 +1,72 @@
+active_league: la_liga
+
+leagues:
+  la_liga:
+    name: "La Liga"
+    sport: football
+    bookmakers:
+      speedy:
+        group_id: 1000095049
+      granmadrid:
+        champ_id: 2941
+      kirol:
+        competition_id: 1
+      codere:
+        sport_handle: "futbol"
+        league_handle: "primera-division"
+
+  premier_league:
+    name: "Premier League"
+    sport: football
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null
+      codere:
+        sport_handle: null
+        league_handle: null
+
+  bundesliga:
+    name: "Bundesliga"
+    sport: football
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null
+      codere:
+        sport_handle: null
+        league_handle: null
+
+  serie_a:
+    name: "Serie A"
+    sport: football
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null
+      codere:
+        sport_handle: null
+        league_handle: null
+
+  ligue_1:
+    name: "Ligue 1"
+    sport: football
+    bookmakers:
+      speedy:
+        group_id: null
+      granmadrid:
+        champ_id: null
+      kirol:
+        competition_id: null
+      codere:
+        sport_handle: null
+        league_handle: null

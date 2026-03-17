@@ -1,0 +1,44 @@
+bookmaker: granmadrid
+name: Casino Gran Madrid
+enabled: true
+
+api:
+  base_url: "https://sb2frontend-altenar2.biahosted.com/api/widget"
+  casino_url: "https://www.casinogranmadridonline.es/apuestas-deportivas"
+  culture: "es-ES"
+  timezone_offset: "-60"
+  integration: "casinogranmadrid"
+  device_type: 1
+  num_format: "en-GB"
+  country_code: "ES"
+  request_delay: 0.5
+  token_wait_seconds: 15
+  timeout: 30
+
+browser:
+  headless: true
+  window_size: "1920,1080"
+  lang: "es-ES"
+  version_main: 145
+
+market_mappings:
+  "1x2":                      { category: "resultado",       key: "1x2" }
+  "Resultado":                 { category: "resultado",       key: "1x2" }
+  "Doble oportunidad":         { category: "resultado",       key: "doble_oportunidad" }
+  "Doble Oportunidad":         { category: "resultado",       key: "doble_oportunidad" }
+  "Total":                     { category: "totales",         key: "over_under" }
+  "Más/Menos Goles":           { category: "totales",         key: "over_under" }
+  "Hándicap Asiático":         { category: "handicap",        key: "asian_handicap" }
+  "Hándicap Europeo":          { category: "handicap",        key: "handicap_europeo" }
+  "Hándicap":                  { category: "handicap",        key: "handicap_europeo" }
+  "Ambos equipos marcan":      { category: "ambos_marcan",    key: "btts" }
+  "Ambos Equipos Marcan":      { category: "ambos_marcan",    key: "btts" }
+  "Resultado Exacto":          { category: "marcador_exacto", key: "resultado_exacto" }
+  "Total corners":             { category: "corners",         key: "total_corners" }
+  "Corners":                   { category: "corners",         key: "total_corners" }
+  "Escala de tiros de Esquina": { category: "corners",        key: "escala_corners" }
+  "Primer goleador":           { category: "primer_gol",      key: "primer_goleador" }
+  "Resultado 1ª parte":        { category: "mitad",           key: "resultado_1a_parte" }
+  "Total Goles 1ª Parte":      { category: "mitad",           key: "total_1a_parte" }
+  "Tarjetas":                  { category: "tarjetas",        key: "total_tarjetas" }
+  "Cuotas mejoradas":          { category: "especiales",      key: "boosted_odds" }

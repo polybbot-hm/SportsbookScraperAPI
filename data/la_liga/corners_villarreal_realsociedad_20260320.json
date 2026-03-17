@@ -1,0 +1,260 @@
+{
+  "partido": "Villarreal vs. Real Sociedad",
+  "fecha": "2026-03-20T20:00:00Z",
+  "categoria": "corners",
+  "scrape_timestamp": {
+    "speedy": "2026-03-17T12:51:17.806639",
+    "granmadrid": "2026-03-17T12:51:53.636475",
+    "kirol": "2026-03-17T12:52:27.701809"
+  },
+  "bookmakers": {
+    "speedy": {
+      "nombre": "SpeedyBet",
+      "partido_raw": "Villarreal - Real Sociedad",
+      "mercados": [
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": 2.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 1.24
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 8.0
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 3.9
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": -3.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 3.05
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 7.5
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 1.37
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Más Tiros de Esquina",
+          "market_key": "mas_corners",
+          "linea": null,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 1.67
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 7.5
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 2.43
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": 1.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 1.4
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 7.0
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 2.95
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": -5.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 5.25
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 9.5
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 1.13
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": 3.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 1.13
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 9.0
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 5.2
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": -1.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 1.95
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 6.75
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 1.9
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": -2.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 2.4
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 6.75
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 1.6
+            }
+          ]
+        },
+        {
+          "nombre_mercado": "Hándicap de Tiros de Esquina 3-Way",
+          "market_key": "handicap_corners",
+          "linea": -4.0,
+          "selecciones": [
+            {
+              "clave": "home",
+              "nombre": "1",
+              "cuota": 3.95
+            },
+            {
+              "clave": "draw",
+              "nombre": "X",
+              "cuota": 8.0
+            },
+            {
+              "clave": "away",
+              "nombre": "2",
+              "cuota": 1.22
+            }
+          ]
+        }
+      ]
+    },
+    "granmadrid": {
+      "nombre": "Casino Gran Madrid",
+      "partido_raw": "Villarreal CF vs. Real Sociedad",
+      "mercados": [
+        {
+          "nombre_mercado": "Escala de tiros de Esquina",
+          "market_key": "escala_corners",
+          "linea": null,
+          "selecciones": [
+            {
+              "clave": "0-5",
+              "nombre": "0-5",
+              "cuota": 11.0
+            },
+            {
+              "clave": "6-8",
+              "nombre": "6-8",
+              "cuota": 3.1
+            },
+            {
+              "clave": "9-11",
+              "nombre": "9-11",
+              "cuota": 2.4286
+            },
+            {
+              "clave": "12-14",
+              "nombre": "12-14",
+              "cuota": 4.25
+            },
+            {
+              "clave": "15+",
+              "nombre": "15+",
+              "cuota": 12.0
+            }
+          ]
+        }
+      ]
+    },
+    "kirol": {
+      "nombre": "Kirolbet",
+      "partido_raw": "Villarreal vs. Real Sociedad",
+      "mercados": null,
+      "nota": "Mercado no disponible en esta casa para este partido"
+    }
+  }
+}

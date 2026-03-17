@@ -1,0 +1,30 @@
+app:
+  name: SportsbookScraperAPI
+  debug: false
+  timezone: Europe/Madrid
+
+scraping:
+  delay_min: 0.3
+  delay_max: 0.8
+  cron: "0 */6 * * *"
+  retry:
+    max_attempts: 3
+    wait_min: 1.0
+    wait_max: 5.0
+
+mongodb:
+  database: sportsbook_scraper
+  collection_snapshots: odds_snapshots
+  collection_events: events
+
+cache:
+  ttl_seconds: 300
+
+calendar:
+  file_path: config/laliga_calendar.json
+
+logging:
+  level: INFO
+  format: json        # json | console
+  output: stdout      # stdout | file
+  file_path: logs/app.log

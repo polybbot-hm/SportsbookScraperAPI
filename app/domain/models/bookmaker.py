@@ -8,3 +8,6 @@ class BookmakerName(str, Enum):
     CODERE = "codere"
     PAF = "paf"
     RETABET = "retabet"
+    SPEEDY = "speedy"
+    GRANMADRID = "granmadrid"
+    KIROL = "kirol"

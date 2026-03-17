@@ -1,0 +1,26 @@
+bookmaker: codere
+name: Codere
+enabled: true
+
+api:
+  base_url: "https://m.apuestas.codere.es/NavigationService"
+  referer: "https://m.apuestas.codere.es/"
+  timeout: 15
+  request_delay: 0.2
+
+market_mappings:
+  "PRINCIPALES":       { category: "resultado",   key: "principales" }
+  "ESTADÍSTICAS":      { category: "faltas",       key: "estadisticas" }
+  "ESTADISTICAS":      { category: "faltas",       key: "estadisticas" }
+  "TIROS":             { category: "especiales",   key: "tiros" }
+  "CORNERS":           { category: "corners",      key: "total_corners" }
+  "HANDICAP":          { category: "handicap",     key: "handicap_europeo" }
+  "RES. FINAL":        { category: "resultado",    key: "resultado_final" }
+  "EQUIPOS":           { category: "especiales",   key: "equipos" }
+  "TARJETAS":          { category: "tarjetas",     key: "total_tarjetas" }
+  "GOLES":             { category: "totales",      key: "over_under" }
+  "GOLEADORES":        { category: "primer_gol",   key: "primer_goleador" }
+  "1ª/2ª PARTE":       { category: "mitad",        key: "primera_segunda_parte" }
+  "ESPECIALES":        { category: "especiales",   key: "especiales" }
+  "COMBINADOS":        { category: "especiales",   key: "combinados" }
+  "MATCHACCA":         { category: "especiales",   key: "matchacca" }

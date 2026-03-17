@@ -1,0 +1,57 @@
+bookmaker: speedy
+name: SpeedyBet
+enabled: true
+
+api:
+  base_url: "https://eu1.offering-api.kambicdn.com/offering/v2018/pafspeedybetes"
+  client_id: 200
+  channel_id: 1
+  lang: "es_ES"
+  market: "ES"
+  timeout: 15
+  request_delay: 0.5
+
+headers:
+  User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+  Accept: "application/json"
+
+market_mappings:
+  # Inglés (por si acaso)
+  "Match Result":                 { category: "resultado",       key: "1x2" }
+  "Double Chance":                { category: "resultado",       key: "doble_oportunidad" }
+  "Draw No Bet":                  { category: "resultado",       key: "draw_no_bet" }
+  "Both Teams to Score":          { category: "ambos_marcan",    key: "btts" }
+  "Over/Under":                   { category: "totales",         key: "over_under" }
+  "Asian Total":                  { category: "totales",         key: "asian_total" }
+  "Asian Handicap":               { category: "handicap",        key: "asian_handicap" }
+  "European Handicap":            { category: "handicap",        key: "handicap_europeo" }
+  "Correct Score":                { category: "marcador_exacto", key: "resultado_exacto" }
+  "Corners - Over/Under":         { category: "corners",         key: "total_corners" }
+  "Corners - Asian Total":        { category: "corners",         key: "asian_corners" }
+  "1st Half - Over/Under":        { category: "mitad",           key: "total_1a_parte" }
+  "1st Half - Result":            { category: "mitad",           key: "resultado_1a_parte" }
+  "1st Half - Both Teams Score":  { category: "mitad",           key: "btts_1a_parte" }
+  "Bookings - Over/Under":        { category: "tarjetas",        key: "total_tarjetas" }
+  "Player to Score":              { category: "primer_gol",      key: "primer_goleador" }
+  "First Goalscorer":             { category: "primer_gol",      key: "primer_goleador" }
+  "Anytime Goalscorer":           { category: "primer_gol",      key: "goleador_en_partido" }
+  # Español (lang=es_ES — nombres reales devueltos por la API)
+  "Resultado Final":              { category: "resultado",       key: "1x2" }
+  "Doble Oportunidad":            { category: "resultado",       key: "doble_oportunidad" }
+  "Apuesta sin empate":           { category: "resultado",       key: "draw_no_bet" }
+  "Descanso":                     { category: "mitad",           key: "resultado_1a_parte" }
+  "Descanso/Tiempo reglamentario": { category: "mitad",          key: "descanso_final" }
+  "Total asiático":               { category: "totales",         key: "asian_total" }
+  "Total de goles":               { category: "totales",         key: "over_under" }
+  "Total de goles de Villarreal": { category: "especiales",      key: "total_goles_villarreal" }
+  "Total de goles de Real Sociedad": { category: "especiales",   key: "total_goles_realsociedad" }
+  "2ª parte":                     { category: "mitad",           key: "total_2a_parte" }
+  "Hándicap ":                    { category: "handicap",        key: "handicap_europeo" }
+  "Hándicap 3-Way":               { category: "handicap",        key: "handicap_europeo" }
+  "Hándicap Asiático ":           { category: "handicap",        key: "asian_handicap" }
+  "Ambos Equipos Marcarán":       { category: "ambos_marcan",    key: "btts" }
+  "Resultado Correcto":           { category: "marcador_exacto", key: "resultado_exacto" }
+  "Primer goleador":              { category: "primer_gol",      key: "primer_goleador" }
+  "Marcará":                      { category: "primer_gol",      key: "goleador_en_partido" }
+  "Más Tiros de Esquina":         { category: "corners",         key: "mas_corners" }
+  "Hándicap de Tiros de Esquina 3-Way": { category: "corners",  key: "handicap_corners" }

@@ -13,7 +13,8 @@ def client():
 def test_health(client: TestClient):
     r = client.get("/health")
     assert r.status_code == 200
-    assert r.json() == {"status": "ok"}
+    data = r.json()
+    assert data["status"] == "ok"
 
 
 def test_bookmakers_list(client: TestClient):
@@ -37,12 +38,11 @@ def test_scrape_status(client: TestClient):
 
 
 def test_laliga_hoy_endpoint_exists(client: TestClient):
-    """Verifica que el endpoint existe. Con repo en memoria devuelve 200 con 0 cuotas."""
+    """Verifica que el endpoint existe. Con repo en memoria devuelve 200 con 0 eventos."""
     r = client.post("/api/v1/scrape/laliga-hoy?bookmaker=fake")
-    # bookmaker inexistente -> 0 cuotas pero respuesta válida
+    # bookmaker inexistente -> 0 eventos pero respuesta válida
     assert r.status_code == 200
     data = r.json()
-    assert "total_cuotas_insertadas" in data
-    assert "partidos_scrapeados" in data
+    assert "total_eventos" in data
     assert "detalle" in data
-    assert data["total_cuotas_insertadas"] == 0
+    assert data["total_eventos"] == 0

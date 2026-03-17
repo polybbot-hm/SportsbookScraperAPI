@@ -1,0 +1,56 @@
+{
+  "partido": "Villarreal vs. Real Sociedad",
+  "fecha_partido": "2026-03-20T20:00:00Z",
+  "mercado": "Over / Under Total Goles",
+  "linea": 2.5,
+  "generado_en": "2026-03-17T14:09:54.736089+00:00",
+  "nota_scraping": "Codere: en vivo (ahora). SpeedyBet, GranMadrid, Kirolbet: scrape del 17/03/2026 12:51-12:52",
+  "resumen": {
+    "over_2_5": {
+      "codere": 1.8,
+      "granmadrid": 1.7693,
+      "speedy": 1.85,
+      "kirol": 1.8
+    },
+    "under_2_5": {
+      "codere": 1.95,
+      "granmadrid": 2.0,
+      "speedy": 1.89,
+      "kirol": 2.0
+    }
+  },
+  "bookmakers": {
+    "codere": {
+      "nombre": "Codere",
+      "partido_raw": "Villarreal vs Real Sociedad",
+      "tipo_mercado": "Europeo — Más/Menos Total Goles",
+      "scrape_timestamp": "2026-03-17T14:09:54.649765+00:00",
+      "over_2_5": 1.8,
+      "under_2_5": 1.95
+    },
+    "granmadrid": {
+      "nombre": "Casino Gran Madrid",
+      "partido_raw": "Villarreal CF vs. Real Sociedad",
+      "tipo_mercado": "Multi-línea — selección Más de 2.5 dentro del mercado Total",
+      "scrape_timestamp": "2026-03-17T12:51:53.636475",
+      "over_2_5": 1.7693,
+      "under_2_5": 2.0
+    },
+    "speedy": {
+      "nombre": "SpeedyBet",
+      "partido_raw": "Villarreal - Real Sociedad",
+      "tipo_mercado": "Total de goles / Total asiático",
+      "scrape_timestamp": "2026-03-17T12:51:17.806639",
+      "over_2_5": 1.85,
+      "under_2_5": 1.89
+    },
+    "kirol": {
+      "nombre": "Kirolbet",
+      "partido_raw": "Villarreal vs. Real Sociedad",
+      "tipo_mercado": "Europeo — Nº Goles (2,5)",
+      "scrape_timestamp": "2026-03-17T12:52:27.701809",
+      "over_2_5": 1.8,
+      "under_2_5": 2.0
+    }
+  }
+}

@@ -1,0 +1,31 @@
+bookmaker: kirol
+name: Kirolbet
+enabled: true
+
+web:
+  base_url: "https://apuestas.kirolbet.es"
+  request_delay: 1.0
+  timeout: 15
+
+headers:
+  User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+  Accept-Language: "es-ES,es;q=0.9"
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+  Referer: "https://apuestas.kirolbet.es"
+
+market_mappings:
+  "1X2":                       { category: "resultado",       key: "1x2" }
+  "1x2":                       { category: "resultado",       key: "1x2" }
+  "Doble Oportunidad":         { category: "resultado",       key: "doble_oportunidad" }
+  "Resultado Exacto":          { category: "marcador_exacto", key: "resultado_exacto" }
+  "Ambos Equipos Marcan":      { category: "ambos_marcan",    key: "btts" }
+  "Gana Sin Empate":           { category: "resultado",       key: "draw_no_bet" }
+  "Total Goles":               { category: "totales",         key: "over_under" }
+  "Más/Menos Goles":           { category: "totales",         key: "over_under" }
+  "Nº Goles":                  { category: "totales",         key: "over_under" }
+  "N Goles":                   { category: "totales",         key: "over_under" }
+  "Hándicap":                  { category: "handicap",        key: "handicap_europeo" }
+  "Resultado Primera Parte":   { category: "mitad",           key: "resultado_1a_parte" }
+  "Total Corners":             { category: "corners",         key: "total_corners" }
+  "Primer Goleador":           { category: "primer_gol",      key: "primer_goleador" }
+  "Último Goleador":           { category: "primer_gol",      key: "ultimo_goleador" }
